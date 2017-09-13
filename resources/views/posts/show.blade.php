@@ -6,9 +6,7 @@
 		
 		{{-- Check if current user is logged-in or a guest --}}
 		@if (Auth::guest())
-			
 			<p class="mt-5">Cheatn?, please <a href="/login/">login</a> to continue.</p>
-			
 		@else
 
 			<div class="blog-header">

@@ -11,13 +11,20 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+
+Route::get('/', 'HomePageController@index')->name('home_page');
+
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/home', 'HomeController@index')->name('home');
+
+	// book
+	Route::resource('/books', 'BooksController');
+});
+
 Route::get('/article', 'ArticleController@index')->name('article_index');
 
 Route::resource('pages', 'PagesController');

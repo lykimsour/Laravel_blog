@@ -15,77 +15,74 @@
 </head>
 <body>
   <div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
+      <div class="navbar navbar-default" role="navigation">
 
-          <!-- Collapsed Hamburger -->
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-            <span class="sr-only">Toggle Navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+        <div class="navbar-inner">
+        
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ route('home') }}"> <img alt="Charisma Logo" src="/images/logo20.png" class="hidden-xs"/>
+                <span>NORVEL</span></a>
 
-          <!-- Branding Image -->
-          <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
-          </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-          <!-- Left Side Of Navbar -->
-          <ul class="nav navbar-nav">
-            &nbsp;
-          </ul>
-
-          <!-- Right Side Of Navbar -->
-          <ul class="nav navbar-nav navbar-right">
-            <!-- Authentication Links -->
+            <!-- user dropdown starts -->
+            <div class="btn-group pull-right">
             @guest
-            <li><a href="{{ route('login') }}">Log in</a></li>
-            <li><a href="{{ route('register') }}">Register</a></li>
             @else
+  
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> 
+                       {{ Auth::user()->name }}
+                    </span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ route('posts.index') }}">All Posts</a></li>
+                  <li><a href="{{ route('posts.create') }}">Add New</a></li>
+                  
+                  
+                  <li><hr/></li>
+                  
+                  <li><a href="{{ route('pages.index') }}">All Pages</a></li>
+                  <li><a href="{{ route('pages.create') }}">Add New</a></li>
 
+                  <li><hr/></li>
+                  <li>
+                    <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    Logout
+                  </a>
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                {{ Auth::user()->name }} <span class="caret"></span>
-              </a>
-
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ route('posts.index') }}">All Posts</a></li>
-                <li><a href="{{ route('posts.create') }}">Add New</a></li>
-                
-                
-                <li><hr/></li>
-                
-                <li><a href="{{ route('pages.index') }}">All Pages</a></li>
-                <li><a href="{{ route('pages.create') }}">Add New</a></li>
-
-                <li><hr/></li>
-                <li>
-                  <a href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                  Logout
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-                </form>
-              </li>
-            </ul>
-          </li>
-          @endguest
-        </ul>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                  </form>
+                </ul>
+            </div>
+              @endguest
+            <!-- user dropdown ends -->
+        </div>
+    </div>
+  @include('partials.admin_header')
+  <div class="ch-container">
+    <div class="row">
+      <div class="col-sm-2 col-lg-2">
+           @guest
+           @else
+            @include('partials.admin_sidebar')
+           @endguest
+       
+      </div>
+      <div id="content" class="col-sm-10 col-lg-10">
+           @yield('content')
       </div>
     </div>
-  </nav>
-  @include('partials.header')
-  @yield('content')
   @include('partials.footer')
-</div>
+   </div>
+  </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>

@@ -17,7 +17,7 @@
    
   </div> -->
   <!-- END #fh5co-offcanvas -->
-<header id="fh5co-header">
+<header >
   <div class="container-fluid">
     <div class="row">
       <!-- <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a> -->

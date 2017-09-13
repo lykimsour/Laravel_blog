@@ -49,6 +49,7 @@ class PostsController extends Controller
        // There are many ways to coke an Egg and same in storing data to database in Laravel
        // You might use or prefer this one https://laravel.com/docs/5.4/queries#inserts
        // I just love using Eloquent
+      
        $post = new Post;
 
        $post->author_ID        = $request->author_ID;
