@@ -40,17 +40,19 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request()->cover->getClientOriginalExtension());
-        // dd($request->all());
+      
         $book = new Book;
+      
         if ($request->hasFile('cover'))
         {
-            $image = $request->cover;
-            $full_name = $image->getClientOriginalName();
-            $extension = $image->getClientOriginalExtension();
-            $image_name = explode('.'.$extension, $full_name);
+            
+            $image          = $request->cover;
+            $full_name      = $image->getClientOriginalName();
+            $extension      = $image->getClientOriginalExtension();
+            $image_name     = explode('.'.$extension, $full_name);
             Storage::putFileAs('covers', new File($image), $full_name);
-            $book->cover = $full_name;
+            
+            $book->cover    = $full_name;
         } 
    
         $book->title = $request->title;
@@ -59,7 +61,7 @@ class BooksController extends Controller
         $messages = 'Books is added';
         $book->save();
     
-        return redirect()->route('books.index', $book->id)->with('success', $messages);;
+        return redirect()->route('books.index', $book->id)->with('success', $messages);
 
     }
 
@@ -82,7 +84,9 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::findOrFail( $id );
+    
+        return view('books.edit', [ 'book' => $book ]);
     }
 
     /**
@@ -94,7 +98,28 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::find( $id );
+        if ($request->hasFile('cover'))
+        {
+            
+            $image          = $request->cover;
+            $full_name      = $image->getClientOriginalName();
+            $extension      = $image->getClientOriginalExtension();
+            $image_name     = explode('.'.$extension, $full_name);
+            Storage::putFileAs('covers', new File($image), $full_name);
+            
+            $book->cover    = $full_name;
+        } 
+        
+        $book->title = $request->title;
+        $book->author_id = $request->author_id;
+        $book->category_id = 1;
+        $messages = 'Books is edited';
+        $book->save();
+        
+        return redirect()->route('books.index', $book->id)->with('success', $messages);
+        
+        // dd($request->all());
     }
 
     /**

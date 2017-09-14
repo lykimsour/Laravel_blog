@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="box col-md-12">
+    <div class="box col-md-6">
         <div class="box-inner">
 
             <div class="box-header well" data-original-title="">
@@ -49,12 +49,12 @@
                         <input type="text" class="form-control" id="title" name="title" placeholder="title" required>
                     </div>
 
-                    <div class="form-group">
-                    <label class="control-label" for="selectError">Categories</label>
-
+            
                     <div class="form-group">
                     	<div class="control-group">
+                        <label class="control-label" for="selectError">Categories</label>
                     	    <div class="controls">
+
                     	        <select data-placeholder="--Select--" id="selectError2" data-rel="chosen">
                     	            <option value=""></option>
          
@@ -67,7 +67,7 @@
                     	    </div>
                     	</div>
                     </div>
-                </div>
+               
                 <div class="form-group">
                     <label for="exampleInputFile">Book Cover</label>
                     <input type="file" id="cover" name="cover" class="image">

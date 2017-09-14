@@ -15,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('post_type', 'post')->paginate( 10 );
+        $posts = Post::where('post_type', 'post')->paginate( 50 );
         return view('posts.index', ['posts' => $posts]);
     }
 
